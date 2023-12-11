@@ -11,7 +11,7 @@ public record FuncionarioDto(
         int totalModified,
         String nome,
         String sobrenome,
-        String phone,
+        String contacto,
         boolean estado,
         Gender genero) {
 }

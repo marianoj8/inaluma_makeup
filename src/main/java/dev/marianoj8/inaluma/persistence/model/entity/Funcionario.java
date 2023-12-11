@@ -19,17 +19,17 @@ public class Funcionario extends CustomAbstractEntity {
     private String nome;
     private String sobrenome;
     @Column(unique = true)
-    private String phone;
+    private String contacto;
     private boolean estado;
     @Column(columnDefinition = "default 'M'")
     private Gender genero;
 
     public Funcionario(Long id, LocalDateTime createdAt, LocalDateTime lastModifiedAt, int totalModified, String nome,
-                       String sobrenome, String phone, boolean estado, Gender genero) {
+                       String sobrenome, String contacto, boolean estado, Gender genero) {
         super(id, createdAt, lastModifiedAt, totalModified);
         this.nome = nome;
         this.sobrenome = sobrenome;
-        this.phone = phone;
+        this.contacto = contacto;
         this.estado = estado;
         this.genero = genero;
     }
