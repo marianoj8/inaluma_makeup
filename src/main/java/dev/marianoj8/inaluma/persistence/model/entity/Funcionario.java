@@ -21,7 +21,7 @@ public class Funcionario extends CustomAbstractEntity {
     @Column(unique = true)
     private String contacto;
     private boolean estado;
-    @Column(columnDefinition = "default 'M'")
+    @Column(columnDefinition = "char(1) default 'M'")
     private Gender genero;
 
     public Funcionario(Long id, LocalDateTime createdAt, LocalDateTime lastModifiedAt, int totalModified, String nome,
