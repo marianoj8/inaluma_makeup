@@ -17,7 +17,7 @@ public class ClienteMapper {
                 dto.phone());
     }
 
-    public static ClienteDto modeToDto(Cliente model) {
+    public static ClienteDto modelToDto(Cliente model) {
         return model == null ? null : new ClienteDto(
                 model.getId(),
                 model.getCreatedAt(),
