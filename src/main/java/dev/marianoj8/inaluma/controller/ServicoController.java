@@ -1,8 +1,8 @@
 package dev.marianoj8.inaluma.controller;
 
-import dev.marianoj8.inaluma.persistence.model.dto.AgendamentoDto;
-import dev.marianoj8.inaluma.persistence.model.entity.Agendamento;
-import dev.marianoj8.inaluma.persistence.service.AgendamentoService;
+import dev.marianoj8.inaluma.persistence.model.dto.ServicoDto;
+import dev.marianoj8.inaluma.persistence.model.entity.Servico;
+import dev.marianoj8.inaluma.persistence.service.ServicoService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,33 +13,33 @@ import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("v1/agendamentos")
-public class AgendamentoController {
+@RequestMapping("v1/servicos")
+public class ServicoController {
 
-    private AgendamentoService service;
+    private ServicoService service;
 
     @GetMapping("{id}")
-    public ResponseEntity<Agendamento> getById(@PathVariable Long id) {
+    public ResponseEntity<Servico> getById(@PathVariable Long id) {
         return ResponseEntity.ok(service.getById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<Agendamento>> fetch() {
+    public ResponseEntity<List<Servico>> fetch() {
         return ResponseEntity.ok(service.fetch());
     }
 
     @PostMapping
-    public ResponseEntity<Agendamento> create(@RequestBody AgendamentoDto dto) {
+    public ResponseEntity<Servico> create(@RequestBody ServicoDto dto) {
         return new ResponseEntity<>(service.create(dto), CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Agendamento> modify(@RequestBody AgendamentoDto dto) {
+    public ResponseEntity<Servico> modify(@RequestBody ServicoDto dto) {
         return new ResponseEntity<>(service.update(dto), ACCEPTED);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Agendamento> modify(@PathVariable Long id) {
+    public ResponseEntity<Servico> modify(@PathVariable Long id) {
         service.delete(id);
         return new ResponseEntity<>(NO_CONTENT);
     }
