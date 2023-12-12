@@ -8,6 +8,8 @@ logging:
     web: debug
 
 spring:
+  host1: "http://localhost:4200"
+  host2: "http://localhost:80"
   application:
     name: inaluma-makeup
   datasource:
