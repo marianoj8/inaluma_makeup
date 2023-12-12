@@ -2,6 +2,7 @@ package dev.marianoj8.inaluma.persistence.service;
 
 import dev.marianoj8.inaluma.persistence.model.dto.AgendamentoDto;
 import dev.marianoj8.inaluma.persistence.model.entity.Agendamento;
+import dev.marianoj8.inaluma.persistence.model.mapper.AgendamentoMapper;
 import dev.marianoj8.inaluma.persistence.repository.AgendamentoRepository;
 import dev.marianoj8.inaluma.persistence.service.util.BaseService;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import static dev.marianoj8.inaluma.persistence.model.mapper.AgendamentoMapper.dtoToModel;
+import static dev.marianoj8.inaluma.persistence.model.mapper.AgendamentoMapper.modelToDto;
 
 @Service
 @AllArgsConstructor

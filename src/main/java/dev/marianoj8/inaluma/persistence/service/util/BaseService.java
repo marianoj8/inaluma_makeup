@@ -2,14 +2,14 @@ package dev.marianoj8.inaluma.persistence.service.util;
 
 import java.util.List;
 
-public interface BaseService<E, D> {
-    E getById(Long id);
+public interface BaseService<T, D> {
+   T getById(Long id);
 
-    List<E> fetch();
+    List<T> fetch();
 
-    E create(D d);
+    T create(D d);
 
-    E update(D d);
+    T update(D d);
 
     void delete(Long id);
 }
