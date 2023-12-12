@@ -3,7 +3,7 @@ package dev.marianoj8.inaluma.persistence.model.mapper;
 import dev.marianoj8.inaluma.persistence.model.dto.ServicoDto;
 import dev.marianoj8.inaluma.persistence.model.entity.Servico;
 
-public class ServiceMapper {
+public class ServicoMapper {
     public static Servico dtoToModel(ServicoDto dto) {
         return dto == null ? null : new Servico(
                 dto.id(),
