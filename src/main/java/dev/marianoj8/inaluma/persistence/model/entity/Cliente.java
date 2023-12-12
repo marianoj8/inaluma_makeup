@@ -20,8 +20,7 @@ public class Cliente extends CustomAbstractEntity {
     private String nome;
     @Column(nullable = false)
     private String sobrenome;
-    @Column(columnDefinition = "char(1) default 'M'")
-    private Gender gender;
+    private Gender gender = Gender.M;
     @Column(unique = true, nullable = false)
     private String phone;
 
