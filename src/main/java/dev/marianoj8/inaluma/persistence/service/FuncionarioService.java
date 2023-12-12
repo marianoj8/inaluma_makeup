@@ -1,38 +1,38 @@
 package dev.marianoj8.inaluma.persistence.service;
 
-import dev.marianoj8.inaluma.persistence.model.dto.AgendamentoDto;
-import dev.marianoj8.inaluma.persistence.model.entity.Agendamento;
-import dev.marianoj8.inaluma.persistence.repository.AgendamentoRepository;
+import dev.marianoj8.inaluma.persistence.model.dto.FuncionarioDto;
+import dev.marianoj8.inaluma.persistence.model.entity.Funcionario;
+import dev.marianoj8.inaluma.persistence.repository.FuncionarioRepository;
 import dev.marianoj8.inaluma.persistence.service.util.BaseService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static dev.marianoj8.inaluma.persistence.model.mapper.AgendamentoMapper.dtoToModel;
+import static dev.marianoj8.inaluma.persistence.model.mapper.FuncionarioMapper.dtoToModel;
 
 @Service
 @AllArgsConstructor
-public class AgendamentoService implements BaseService<Agendamento, AgendamentoDto> {
-    private AgendamentoRepository repository;
+public class FuncionarioService implements BaseService<Funcionario, FuncionarioDto> {
+    private FuncionarioRepository repository;
 
     @Override
-    public Agendamento getById(Long id) {
+    public Funcionario getById(Long id) {
         return repository.getReferenceById(id);
     }
 
     @Override
-    public List<Agendamento> fetch() {
+    public List<Funcionario> fetch() {
         return repository.findAll();
     }
 
     @Override
-    public Agendamento create(AgendamentoDto dto) {
+    public Funcionario create(FuncionarioDto dto) {
         return repository.save(dtoToModel(dto));
     }
 
     @Override
-    public Agendamento update(AgendamentoDto dto) {
+    public Funcionario update(FuncionarioDto dto) {
         return repository.save(dtoToModel(dto));
     }
 
