@@ -13,7 +13,7 @@ spring:
   application:
     name: inaluma-makeup
   datasource:
-    url: jdbc:mysql://localhost:3306/inaluma_db?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&sslMode=DISABLED&useTimezone=true&serverTimezone=Africa/Luanda
+    url: jdbc:mysql://inaluma-db:3306/inaluma_db?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&sslMode=DISABLED&useTimezone=true&serverTimezone=Africa/Luanda
     username: inaluma
     password: password
 
