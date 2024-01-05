@@ -1,4 +1,4 @@
-package com.wasp.avt.persistence.utils.payloads;
+package dev.marianoj8.inaluma.persistence.util;
 
 public class UploadFileResponse {
     private String fileName;
