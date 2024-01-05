@@ -16,7 +16,12 @@ public class ProdutoMapper {
                 dto.estado(),
                 dto.preco(),
                 dto.stock(),
-                dto.code()
+                dto.code(),
+                dto.data(),
+                dto.fileName(),
+                dto.contentType(),
+                dto.fixedSize()
+
         );
     }
 
@@ -32,6 +37,11 @@ public class ProdutoMapper {
                 model.isEstado(),
                 model.getPreco(),
                 model.getStock(),
-                model.getCode());
+                model.getCode(),
+                model.getData(),
+                model.getFileName(),
+                model.getContentType(),
+                model.getFixedSize()
+        );
     }
 }
