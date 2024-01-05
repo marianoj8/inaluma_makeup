@@ -13,5 +13,10 @@ public record ProdutoDto(
         boolean estado,
         double preco,
         int stock,
-        String code) {
+        String code,
+        byte[] data,
+        String fileName,
+        String contentType,
+        double fixedSize
+) {
 }
