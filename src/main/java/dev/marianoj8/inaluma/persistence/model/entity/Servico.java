@@ -3,6 +3,7 @@ package dev.marianoj8.inaluma.persistence.model.entity;
 import dev.marianoj8.inaluma.persistence.model.entity.utils.TimeUnits;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,8 +32,16 @@ public class Servico extends CustomAbstractEntity {
     @ManyToOne(targetEntity = Funcionario.class, optional = true)
     private Funcionario funcionario;
 
+    @Lob
+    @Column(columnDefinition = "longblob")
+    private byte[] data;
+
+    private String fileName;
+    private String contentType;
+    private double fixedSize;
+
     public Servico(Long id, LocalDateTime createdAt, LocalDateTime lastModifiedAt, int totalModified, String nome,
-                   String descricao, double preco, int duracao, TimeUnits units, boolean estado, Funcionario funcionario) {
+                   String descricao, double preco, int duracao, TimeUnits units, boolean estado, Funcionario funcionario, byte[] data, String fileName, String contentType, double fixedSize) {
         super(id, createdAt, lastModifiedAt, totalModified);
         this.nome = nome;
         this.descricao = descricao;
@@ -41,5 +50,10 @@ public class Servico extends CustomAbstractEntity {
         this.units = units;
         this.estado = estado;
         this.funcionario = funcionario;
+
+        this.data = data;
+        this.fileName = fileName;
+        this.contentType = contentType;
+        this.fixedSize = fixedSize;
     }
 }

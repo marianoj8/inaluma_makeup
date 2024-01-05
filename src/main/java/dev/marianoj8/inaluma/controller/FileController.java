@@ -1,6 +1,7 @@
 package dev.marianoj8.inaluma.controller;
 
 import dev.marianoj8.inaluma.persistence.model.entity.Produto;
+import dev.marianoj8.inaluma.persistence.model.entity.Servico;
 import dev.marianoj8.inaluma.persistence.service.DbFileService;
 import dev.marianoj8.inaluma.persistence.util.UploadFileResponse;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.security.Provider;
 
 @RestController
 @RequestMapping(path = "v1/files")
@@ -41,12 +44,40 @@ public class FileController {
     @GetMapping(path = "product/{productId}")
     public ResponseEntity<Resource> downloadImage(@PathVariable Long productId) {
 //        log.info("Loading file from database");
-        Produto user = dbFileService.getProductImg(productId);
+        Produto produto = dbFileService.getProductImg(productId);
 
         return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(user.getContentType()))
+                .contentType(MediaType.parseMediaType(produto.getContentType()))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment")
                 .allow(HttpMethod.GET)
-                .body(new ByteArrayResource(user.getData()));
+                .body(new ByteArrayResource(produto.getData()));
+    }
+
+
+    @Transactional
+    @PostMapping(path = "service/img")
+    public UploadFileResponse uploadServiceImage(@RequestParam("file") MultipartFile file,
+                                          @RequestParam("serviceId") Long serviceId) {
+
+       Servico service = dbFileService.storeServiceImg(file, serviceId);
+
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/v1/files/service/")
+                .path("" + service.getId())
+                .toUriString();
+
+        return new UploadFileResponse(service.getFileName(), fileDownloadUri, file.getContentType(), file.getSize());
+    }
+
+    @GetMapping(path = "service/{serviceId}")
+    public ResponseEntity<Resource> downloadServiceImage(@PathVariable Long serviceId) {
+//        log.info("Loading file from database");
+        Servico servico = dbFileService.getServiceImg(serviceId);
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(servico.getContentType()))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment")
+                .allow(HttpMethod.GET)
+                .body(new ByteArrayResource(servico.getData()));
     }
 }

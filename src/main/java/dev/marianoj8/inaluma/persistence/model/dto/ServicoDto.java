@@ -16,5 +16,9 @@ public record ServicoDto(
         int duracao,
         TimeUnits units,
         boolean estado,
-        Funcionario funcionario) {
+        Funcionario funcionario,
+        byte[] data,
+        String fileName,
+        String contentType,
+        double fixedSize) {
 }

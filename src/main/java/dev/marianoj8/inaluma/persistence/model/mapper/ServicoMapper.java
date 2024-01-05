@@ -16,7 +16,11 @@ public class ServicoMapper {
                 dto.duracao(),
                 dto.units(),
                 dto.estado(),
-                dto.funcionario()
+                dto.funcionario(),
+                dto.data(),
+                dto.fileName(),
+                dto.contentType(),
+                dto.fixedSize()
         );
     }
 
@@ -32,6 +36,10 @@ public class ServicoMapper {
                 model.getDuracao(),
                 model.getUnits(),
                 model.isEstado(),
-                model.getFuncionario());
+                model.getFuncionario(),
+                model.getData(),
+                model.getFileName(),
+                model.getContentType(),
+                model.getFixedSize());
     }
 }
