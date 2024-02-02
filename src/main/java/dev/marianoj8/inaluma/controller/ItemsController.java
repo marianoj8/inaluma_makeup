@@ -1,7 +1,7 @@
 package dev.marianoj8.inaluma.controller;
 
-import dev.marianoj8.inaluma.persistence.model.entity.ApplicationUser;
-import dev.marianoj8.inaluma.persistence.service.ApplicationUserService;
+import dev.marianoj8.inaluma.persistence.model.entity.Items;
+import dev.marianoj8.inaluma.persistence.service.ItemsService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,33 +12,28 @@ import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("v1/users")
-public class ApplicationUserController {
+@RequestMapping("v1/items")
+public class ItemsController {
 
-    private ApplicationUserService service;
+    private ItemsService service;
 
     @GetMapping("{id}")
-    public ResponseEntity<ApplicationUser> getById(@PathVariable Long id) {
+    public ResponseEntity<Items> getById(@PathVariable Long id) {
         return ResponseEntity.ok(service.getById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<ApplicationUser>> fetch() {
+    public ResponseEntity<List<Items>> fetch() {
         return ResponseEntity.ok(service.fetch());
     }
 
-    @GetMapping("verify-user")
-    public ResponseEntity<Boolean> getByUsername(@RequestParam String username) {
-        return ResponseEntity.ok(service.getByUsername(username));
-    }
-
     @PostMapping
-    public ResponseEntity<ApplicationUser> create(@RequestBody ApplicationUser dto) {
+    public ResponseEntity<Items> create(@RequestBody Items dto) {
         return new ResponseEntity<>(service.create(dto), CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<ApplicationUser> modify(@RequestBody ApplicationUser dto) {
+    public ResponseEntity<Items> modify(@RequestBody Items dto) {
         return new ResponseEntity<>(service.update(dto), ACCEPTED);
     }
 

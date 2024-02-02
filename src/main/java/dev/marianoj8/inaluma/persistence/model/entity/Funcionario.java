@@ -18,17 +18,17 @@ import java.time.LocalDateTime;
 public class Funcionario extends CustomAbstractEntity {
     private String nome;
     private String sobrenome;
-    @Column(unique = true)
-    private String contacto;
+    @Column(unique = true, nullable = false)
+    private String contato;
     private boolean estado;
     private Gender genero = Gender.M;
 
     public Funcionario(Long id, LocalDateTime createdAt, LocalDateTime lastModifiedAt, int totalModified, String nome,
-                       String sobrenome, String contacto, boolean estado, Gender genero) {
+                       String sobrenome, String contato, boolean estado, Gender genero) {
         super(id, createdAt, lastModifiedAt, totalModified);
         this.nome = nome;
         this.sobrenome = sobrenome;
-        this.contacto = contacto;
+        this.contato = contato;
         this.estado = estado;
         this.genero = genero;
     }

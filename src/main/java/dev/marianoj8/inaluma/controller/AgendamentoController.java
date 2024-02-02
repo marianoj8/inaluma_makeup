@@ -1,6 +1,5 @@
 package dev.marianoj8.inaluma.controller;
 
-import dev.marianoj8.inaluma.persistence.model.dto.AgendamentoDto;
 import dev.marianoj8.inaluma.persistence.model.entity.Agendamento;
 import dev.marianoj8.inaluma.persistence.service.AgendamentoService;
 import lombok.AllArgsConstructor;
@@ -29,12 +28,12 @@ public class AgendamentoController {
     }
 
     @PostMapping
-    public ResponseEntity<Agendamento> create(@RequestBody AgendamentoDto dto) {
+    public ResponseEntity<Agendamento> create(@RequestBody Agendamento dto) {
         return new ResponseEntity<>(service.create(dto), CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Agendamento> modify(@RequestBody AgendamentoDto dto) {
+    public ResponseEntity<Agendamento> modify(@RequestBody Agendamento dto) {
         return new ResponseEntity<>(service.update(dto), ACCEPTED);
     }
 

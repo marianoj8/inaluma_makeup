@@ -1,6 +1,5 @@
 package dev.marianoj8.inaluma.controller;
 
-import dev.marianoj8.inaluma.persistence.model.dto.ServicoDto;
 import dev.marianoj8.inaluma.persistence.model.entity.Servico;
 import dev.marianoj8.inaluma.persistence.service.ServicoService;
 import lombok.AllArgsConstructor;
@@ -29,12 +28,12 @@ public class ServicoController {
     }
 
     @PostMapping
-    public ResponseEntity<Servico> create(@RequestBody ServicoDto dto) {
+    public ResponseEntity<Servico> create(@RequestBody Servico dto) {
         return new ResponseEntity<>(service.create(dto), CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Servico> modify(@RequestBody ServicoDto dto) {
+    public ResponseEntity<Servico> modify(@RequestBody Servico dto) {
         return new ResponseEntity<>(service.update(dto), ACCEPTED);
     }
 

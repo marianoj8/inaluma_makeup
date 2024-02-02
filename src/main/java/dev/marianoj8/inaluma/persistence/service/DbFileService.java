@@ -3,16 +3,14 @@ package dev.marianoj8.inaluma.persistence.service;
 import dev.marianoj8.inaluma.persistence.exceptions.FileStorageException;
 import dev.marianoj8.inaluma.persistence.model.entity.Produto;
 import dev.marianoj8.inaluma.persistence.model.entity.Servico;
-import dev.marianoj8.inaluma.persistence.model.mapper.ServicoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-
-import static dev.marianoj8.inaluma.persistence.model.mapper.ProdutoMapper.modelToDto;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -32,7 +30,7 @@ public class DbFileService {
         }
     }
 
-    public Produto storeProductImg(MultipartFile file, Long productId) {
+    public Produto storeProdutcImg(MultipartFile file, Long productId) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         try {
             if (fileName.contains("..")) {
@@ -47,14 +45,14 @@ public class DbFileService {
                 produto.setContentType(file.getContentType());
                 produto.setFixedSize(fixedSize);
 
-                return produtoService.update(modelToDto(produto));
+                return produtoService.update(produto);
             }
         } catch (IOException ioe) {
             throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ioe);
         }
     }
 
-
+    @Transactional
     public Servico getServiceImg(Long serviceId) {
         Servico servico = servicoService.getById(serviceId);
         if (servico.getId() != null) {
@@ -80,7 +78,7 @@ public class DbFileService {
                 servico.setContentType(file.getContentType());
                 servico.setFixedSize(fixedSize);
 
-                return servicoService.update(ServicoMapper.modelToDto(servico));
+                return servicoService.update(servico);
             }
         } catch (IOException ioe) {
             throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ioe);

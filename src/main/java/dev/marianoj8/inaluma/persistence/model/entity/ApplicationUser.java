@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 public class ApplicationUser extends CustomAbstractEntity {
     @Column(unique = true, nullable = false)
     private String username;
-    private String tipo;
+    private String perfil;
     @Column(nullable = false)
     private String password;
     private boolean estado;
@@ -30,11 +30,11 @@ public class ApplicationUser extends CustomAbstractEntity {
     private Cliente cliente;
 
     public ApplicationUser(Long id, LocalDateTime createdAt, LocalDateTime lastModifiedAt, int totalModified,
-                           String username, String tipo, String password,
+                           String username, String perfil, String password,
                            boolean estado, Funcionario funcionario, Cliente cliente) {
         super(id, createdAt, lastModifiedAt, totalModified);
         this.username = username;
-        this.tipo = tipo;
+        this.perfil = perfil;
         this.password = password;
         this.estado = estado;
         this.funcionario = funcionario;

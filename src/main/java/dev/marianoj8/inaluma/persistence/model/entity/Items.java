@@ -15,15 +15,19 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Pagamento extends CustomAbstractEntity {
-    @Column(nullable = false)
-    private String status;
-    @Column(nullable = false)
-    private String metodo;
-    @Column(nullable = false)
-    private double valorPagamento;
+public class Items extends CustomAbstractEntity {
 
+    private int qty;
+    private double subtotal;
+
+    @ManyToOne(targetEntity = Produto.class)
+    private Produto produto;
+    @ManyToOne(targetEntity = Servico.class)
+    private Servico servico;
     @ManyToOne(targetEntity = Factura.class)
     private Factura factura;
+
+    @ManyToOne(targetEntity = Agendamento.class)
+    private Agendamento agendamento;
 
 }

@@ -21,3 +21,11 @@ spring:
     open-in-view: false
     hibernate:
       ddl-auto: update
+
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 25MB
+      resolve-lazily: false
+      enabled: true
+      file-size-threshold: 2KB
