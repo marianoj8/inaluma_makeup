@@ -20,16 +20,16 @@ public class Cliente extends CustomAbstractEntity {
     private String nome;
     @Column(nullable = false)
     private String sobrenome;
-    private Gender gender = Gender.M;
+    private Gender genero = Gender.M;
     @Column(unique = true, nullable = false)
-    private String phone;
+    private String contato;
 
     public Cliente(Long id, LocalDateTime createdAt, LocalDateTime lastModifiedAt, int totalModified, String nome,
-                   String sobrenome, Gender gender, String phone) {
+                   String sobrenome, Gender genero, String contato) {
         super(id, createdAt, lastModifiedAt, totalModified);
         this.nome = nome;
         this.sobrenome = sobrenome;
-        this.gender = gender;
-        this.phone = phone;
+        this.genero = genero;
+        this.contato = contato;
     }
 }

@@ -1,6 +1,5 @@
 package dev.marianoj8.inaluma.controller;
 
-import dev.marianoj8.inaluma.persistence.model.dto.FuncionarioDto;
 import dev.marianoj8.inaluma.persistence.model.entity.Funcionario;
 import dev.marianoj8.inaluma.persistence.service.FuncionarioService;
 import lombok.AllArgsConstructor;
@@ -24,17 +23,17 @@ public class FuncionarioController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Funcionario>> fetch() {
-        return ResponseEntity.ok(service.fetch());
+    public ResponseEntity<List<Funcionario>> fetch(@RequestParam(defaultValue = "") String description) {
+        return ResponseEntity.ok(service.fetch(description));
     }
 
     @PostMapping
-    public ResponseEntity<Funcionario> create(@RequestBody FuncionarioDto dto) {
+    public ResponseEntity<Funcionario> create(@RequestBody Funcionario dto) {
         return new ResponseEntity<>(service.create(dto), CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Funcionario> modify(@RequestBody FuncionarioDto dto) {
+    public ResponseEntity<Funcionario> modify(@RequestBody Funcionario dto) {
         return new ResponseEntity<>(service.update(dto), ACCEPTED);
     }
 

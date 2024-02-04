@@ -12,12 +12,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.security.Provider;
 
 @RestController
 @RequestMapping(path = "v1/files")
@@ -31,7 +30,7 @@ public class FileController {
     public UploadFileResponse uploadImage(@RequestParam("file") MultipartFile file,
                                           @RequestParam("productId") Long productId) {
 
-        Produto produto = dbFileService.storeProductImg(file, productId);
+        Produto produto = dbFileService.storeProdutcImg(file, productId);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/v1/files/product/")
@@ -55,11 +54,42 @@ public class FileController {
 
 
     @Transactional
+    @PutMapping(path = "product/img")
+    public UploadFileResponse updateImage(@RequestParam("file") MultipartFile file,
+                                          @RequestParam("productId") Long productId) {
+
+        Produto produto = dbFileService.storeProdutcImg(file, productId);
+
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/v1/files/product/")
+                .path("" + produto.getId())
+                .toUriString();
+
+        return new UploadFileResponse(produto.getFileName(), fileDownloadUri, file.getContentType(), file.getSize());
+    }
+
+
+    @Transactional
     @PostMapping(path = "service/img")
     public UploadFileResponse uploadServiceImage(@RequestParam("file") MultipartFile file,
-                                          @RequestParam("serviceId") Long serviceId) {
+                                                 @RequestParam("serviceId") Long serviceId) {
 
-       Servico service = dbFileService.storeServiceImg(file, serviceId);
+        Servico service = dbFileService.storeServiceImg(file, serviceId);
+
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/v1/files/service/")
+                .path("" + service.getId())
+                .toUriString();
+
+        return new UploadFileResponse(service.getFileName(), fileDownloadUri, file.getContentType(), file.getSize());
+    }
+
+    @Transactional
+    @PutMapping(path = "service/img")
+    public UploadFileResponse updateServiceImage(@RequestParam("file") MultipartFile file,
+                                                 @RequestParam("serviceId") Long serviceId) {
+
+        Servico service = dbFileService.storeServiceImg(file, serviceId);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/v1/files/service/")

@@ -1,8 +1,8 @@
 package dev.marianoj8.inaluma.controller;
 
-import dev.marianoj8.inaluma.persistence.model.dto.ClienteDto;
 import dev.marianoj8.inaluma.persistence.model.entity.Cliente;
 import dev.marianoj8.inaluma.persistence.service.ClienteService;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,17 +24,17 @@ public class ClienteController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Cliente>> fetch() {
-        return ResponseEntity.ok(service.fetch());
+    public ResponseEntity<List<Cliente>> fetch(@RequestParam(defaultValue = "") String description) {
+        return ResponseEntity.ok(service.fetch(description));
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> create(@RequestBody ClienteDto dto) {
+    public ResponseEntity<Cliente> create(@RequestBody Cliente dto) {
         return new ResponseEntity<>(service.create(dto), CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Cliente> modify(@RequestBody ClienteDto dto) {
+    public ResponseEntity<Cliente> modify(@RequestBody Cliente dto) {
         return new ResponseEntity<>(service.update(dto), ACCEPTED);
     }
 

@@ -1,6 +1,5 @@
 package dev.marianoj8.inaluma.controller;
 
-import dev.marianoj8.inaluma.persistence.model.dto.ApplicationUserDto;
 import dev.marianoj8.inaluma.persistence.model.entity.ApplicationUser;
 import dev.marianoj8.inaluma.persistence.service.ApplicationUserService;
 import lombok.AllArgsConstructor;
@@ -28,13 +27,18 @@ public class ApplicationUserController {
         return ResponseEntity.ok(service.fetch());
     }
 
+    @GetMapping("verify-user")
+    public ResponseEntity<Boolean> getByUsername(@RequestParam String username) {
+        return ResponseEntity.ok(service.getByUsername(username));
+    }
+
     @PostMapping
-    public ResponseEntity<ApplicationUser> create(@RequestBody ApplicationUserDto dto) {
+    public ResponseEntity<ApplicationUser> create(@RequestBody ApplicationUser dto) {
         return new ResponseEntity<>(service.create(dto), CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<ApplicationUser> modify(@RequestBody ApplicationUserDto dto) {
+    public ResponseEntity<ApplicationUser> modify(@RequestBody ApplicationUser dto) {
         return new ResponseEntity<>(service.update(dto), ACCEPTED);
     }
 

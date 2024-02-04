@@ -1,44 +1,36 @@
 package dev.marianoj8.inaluma.persistence.service;
 
-import dev.marianoj8.inaluma.persistence.model.dto.AgendamentoDto;
 import dev.marianoj8.inaluma.persistence.model.entity.Agendamento;
-import dev.marianoj8.inaluma.persistence.model.mapper.AgendamentoMapper;
 import dev.marianoj8.inaluma.persistence.repository.AgendamentoRepository;
-import dev.marianoj8.inaluma.persistence.service.util.BaseService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
-
-import static dev.marianoj8.inaluma.persistence.model.mapper.AgendamentoMapper.dtoToModel;
-import static dev.marianoj8.inaluma.persistence.model.mapper.AgendamentoMapper.modelToDto;
 
 @Service
 @AllArgsConstructor
-public class AgendamentoService implements BaseService<Agendamento, AgendamentoDto> {
+public class AgendamentoService {
     private AgendamentoRepository repository;
 
-    @Override
     public Agendamento getById(Long id) {
         return repository.getReferenceById(id);
     }
 
-    @Override
     public List<Agendamento> fetch() {
         return repository.findAll();
     }
 
-    @Override
-    public Agendamento create(AgendamentoDto dto) {
-        return repository.save(dtoToModel(dto));
+    public Agendamento create(Agendamento agendamento) {
+        var agendamentoSaved =  repository.save(agendamento);
+        agendamentoSaved.setNumeroAgendamento(agendamentoSaved.getId() + "/" + LocalDateTime.now().getYear());
+        return repository.save(agendamentoSaved);
     }
 
-    @Override
-    public Agendamento update(AgendamentoDto dto) {
-        return repository.save(dtoToModel(dto));
+    public Agendamento update(Agendamento agendamento) {
+        return repository.save(agendamento);
     }
 
-    @Override
     public void delete(Long id) {
         repository.deleteById(id);
     }

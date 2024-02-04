@@ -1,8 +1,7 @@
 package dev.marianoj8.inaluma.controller;
 
-import dev.marianoj8.inaluma.persistence.model.dto.VendaDto;
-import dev.marianoj8.inaluma.persistence.model.entity.Venda;
-import dev.marianoj8.inaluma.persistence.service.VendaService;
+import dev.marianoj8.inaluma.persistence.model.entity.Items;
+import dev.marianoj8.inaluma.persistence.service.ItemsService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,28 +12,33 @@ import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("v1/vendas")
-public class VendaController {
+@RequestMapping("v1/items")
+public class ItemsController {
 
-    private VendaService service;
+    private ItemsService service;
 
     @GetMapping("{id}")
-    public ResponseEntity<Venda> getById(@PathVariable Long id) {
+    public ResponseEntity<Items> getById(@PathVariable Long id) {
         return ResponseEntity.ok(service.getById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<Venda>> fetch() {
+    public ResponseEntity<List<Items>> fetch() {
         return ResponseEntity.ok(service.fetch());
     }
 
+    @GetMapping("fatura/{faturaId}")
+    public ResponseEntity<List<Items>> fetchByFaturaId(@PathVariable Long faturaId){
+        return ResponseEntity.ok(service.getByFaturaId(faturaId));
+    }
+
     @PostMapping
-    public ResponseEntity<Venda> create(@RequestBody VendaDto dto) {
+    public ResponseEntity<Items> create(@RequestBody Items dto) {
         return new ResponseEntity<>(service.create(dto), CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Venda> modify(@RequestBody VendaDto dto) {
+    public ResponseEntity<Items> modify(@RequestBody Items dto) {
         return new ResponseEntity<>(service.update(dto), ACCEPTED);
     }
 
