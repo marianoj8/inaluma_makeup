@@ -32,4 +32,8 @@ public class ItemsService {
     public void delete(Long id) {
         repository.deleteById(id);
     }
+
+    public List<Items> getByFaturaId(Long faturaId) {
+        return repository.getByFaturaId(faturaId);
+    }
 }

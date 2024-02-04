@@ -27,6 +27,11 @@ public class ItemsController {
         return ResponseEntity.ok(service.fetch());
     }
 
+    @GetMapping("fatura/{faturaId}")
+    public ResponseEntity<List<Items>> fetchByFaturaId(@PathVariable Long faturaId){
+        return ResponseEntity.ok(service.getByFaturaId(faturaId));
+    }
+
     @PostMapping
     public ResponseEntity<Items> create(@RequestBody Items dto) {
         return new ResponseEntity<>(service.create(dto), CREATED);

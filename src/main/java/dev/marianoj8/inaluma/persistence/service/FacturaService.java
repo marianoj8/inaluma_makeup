@@ -36,4 +36,12 @@ public class FacturaService {
     public void delete(Long id) {
         repository.deleteById(id);
     }
+
+    public Factura getByClienteId(Long clienteId) {
+        return repository.getByClienteId(clienteId);
+    }
+
+    public Factura getByAgendamentoId(Long agendamentoId) {
+        return repository.getByAgendamentoId(agendamentoId);
+    }
 }

@@ -27,6 +27,17 @@ public class FacturaController {
         return ResponseEntity.ok(service.fetch());
     }
 
+
+
+    @GetMapping("cliente/{clienteId}")
+    public ResponseEntity<Factura> getByClienteId(@PathVariable Long clienteId){
+        return ResponseEntity.ok(service.getByClienteId(clienteId));
+    }
+    @GetMapping("agendamento/{agendamentoId}")
+    public ResponseEntity<Factura> getByAgendamentoId(@PathVariable Long agendamentoId){
+        return ResponseEntity.ok(service.getByAgendamentoId(agendamentoId));
+    }
+
     @PostMapping
     public ResponseEntity<Factura> create(@RequestBody Factura dto) {
         return new ResponseEntity<>(service.create(dto), CREATED);
