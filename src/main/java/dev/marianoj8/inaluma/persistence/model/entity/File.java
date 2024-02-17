@@ -2,8 +2,7 @@ package dev.marianoj8.inaluma.persistence.model.entity;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.lang.NonNull;
 
 import dev.marianoj8.inaluma.persistence.model.entity.utils.CustomAbstractEntity;
 import jakarta.persistence.Column;
@@ -20,10 +19,10 @@ import lombok.Setter;
 @Getter @Setter @AllArgsConstructor @Entity @NoArgsConstructor
 public class File extends CustomAbstractEntity {
   @NotEmpty private String fileName;
-  @NotEmpty private String contentType;
+  @NonNull @NotEmpty private String contentType;
   @NotNull private double fixedSize;
 
-  @Lob @Column(columnDefinition = "longblob", nullable = false)
+  @NonNull @Lob @Column(columnDefinition = "longblob")
   private byte[] data;
 
   @OneToOne(targetEntity = User.class) @OnDelete(action = OnDeleteAction.CASCADE) 
