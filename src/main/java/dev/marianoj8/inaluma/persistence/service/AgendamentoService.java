@@ -1,12 +1,14 @@
 package dev.marianoj8.inaluma.persistence.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import dev.marianoj8.inaluma.persistence.model.entity.Agendamento;
 import dev.marianoj8.inaluma.persistence.repository.AgendamentoRepository;
-import lombok.AllArgsConstructor;
+import dev.marianoj8.inaluma.persistence.service.util.AbstractDocumentService;
 
-@Service @AllArgsConstructor
-public class AgendamentoService {
-  @Autowired private AgendamentoRepository repository;
+@Service
+public class AgendamentoService extends AbstractDocumentService<Agendamento, AgendamentoRepository> {
+  public List<Agendamento> fetchByFuncionarioId(Long id) { return repository.fetchByFuncionarioId(id); }
 }
