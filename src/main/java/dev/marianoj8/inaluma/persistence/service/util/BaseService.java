@@ -13,7 +13,7 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-@MappedSuperclass @AllArgsConstructor @NoArgsConstructor
+@MappedSuperclass @AllArgsConstructor @NoArgsConstructor @Transactional
 public abstract class BaseService<T extends CustomAbstractEntity, R extends BaseRepository<T>> {
   @Autowired protected R repository;
   @Autowired public ModelMapper mapper;
