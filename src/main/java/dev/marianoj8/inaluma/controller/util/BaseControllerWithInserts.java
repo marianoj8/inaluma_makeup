@@ -3,6 +3,7 @@ package dev.marianoj8.inaluma.controller.util;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -13,7 +14,7 @@ import lombok.NoArgsConstructor;
 
 @MappedSuperclass @NoArgsConstructor
 public class BaseControllerWithInserts<T extends CustomAbstractEntity, S extends BaseService<T, ?>> extends BaseController<T, S>{
-  @PutMapping("new")
+  @PostMapping("new")
   public ResponseEntity<T> create(@NonNull @RequestBody T dto) { return new ResponseEntity<T>(service.create(dto), HttpStatus.CREATED); }
 
   @PutMapping("update")
