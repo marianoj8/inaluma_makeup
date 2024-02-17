@@ -19,45 +19,28 @@ import java.io.IOException;
 @Service @AllArgsConstructor
 public class FileService {
   @Autowired private FileRepository repository;
-  @Autowired private UserService usersService;
-  @Autowired private ArtigoService artigoService;
   
-  protected String tabela() { return "File"; }
-  public File retrieveImg(User user) { return prepareDownload(user.getImagem()); }
-  public File retrieveImg(Artigo artigo) { return prepareDownload(artigo.getImagem()); }
-  public File retrieveImg(@NonNull Long ownerId, Boolean isUser) {
-    File img;
+  public File fetchByUserId(Long id) { return prepareDownload(id, true); }
+  public File fetchByArtigoId(Long id) { return prepareDownload(id, false); }
 
-    if(isUser) img = usersService.getById(ownerId).getImagem();
-    else img = artigoService.getById(ownerId).getImagem();
+  private File prepareDownload(Long id, Boolean forUser) {
+    final File file = forUser ? repository.fetchByUserId(id) : repository.fetchByArtigoId(id);
+    file.setData(ImageUtils.descomprimirImagem(file.getData()));
 
-    return prepareDownload(img);
+    return file;
   }
 
-  private File prepareDownload(@NonNull File f) {
-    var file = repository.findById(f.getId());
-    return file.get().setData(ImageUtils.descomprimirImagem(f.getData()));
-  }
-
-  public File saveFile(MultipartFile f, User owner) {
-    owner.setImagem(repository.save(processFile(f)));
-    usersService.update(owner);
-
-    return owner.getImagem();
-  }
-
-  public File saveFile(MultipartFile f, Artigo owner) {
-    owner.setImagem(repository.save(processFile(f)));
-    artigoService.update(owner);
-
-    return owner.getImagem();
-  }
-
-  private @NonNull File processFile(MultipartFile f) {
+  public File saveFile(MultipartFile multiFile, File file) {
     try {
-      var fileName = StringUtils.cleanPath(f.getOriginalFilename());
-      var fixedSize = Double.parseDouble(String.valueOf(f.getSize()))/1024/1024;  
-      return new File(fileName, f.getContentType(), fixedSize, ImageUtils.comprimirImagem(f.getBytes()));
+      var fileName = StringUtils.cleanPath(multiFile.getOriginalFilename());
+      var fixedSize = Double.parseDouble(String.valueOf(multiFile.getSize()))/1024/1024;
+
+      file.setFileName(fileName);
+      file.setContentType(multiFile.getContentType());
+      file.setFixedSize(fixedSize);
+      file.setData(ImageUtils.comprimirImagem(multiFile.getBytes()));
+
+      return file;
     } catch (IOException e) { throw new FileStorageException("Could not store file Please try again!"); }
   }
 }
