@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 
 @MappedSuperclass @NoArgsConstructor
 public class BaseControllerWithInserts<T extends CustomAbstractEntity, S extends BaseService<T, ?>> extends BaseController<T, S>{
+  @PutMapping("new")
   public ResponseEntity<T> create(@NonNull @RequestBody T dto) { return new ResponseEntity<T>(service.create(dto), HttpStatus.CREATED); }
 
   @PutMapping("update")
