@@ -35,7 +35,12 @@ public class FileController {
     return saveOrUpdate(multiFile, file);
   }
 
-  private Boolean isValidFile(File file) { return (file.getUser() != null) || (file.getArtigo() != null); }
+  private Boolean isValidFile(File file) {
+    return (file.getUser() != null)
+      || (file.getProduto() != null)
+      || (file.getVarianteProduto() != null)
+      || (file.getServico() != null);
+  }
 
   private ResponseEntity<File> saveOrUpdate(MultipartFile multiFile, File file) {
     return isValidFile(file) ? ResponseEntity.ok(service.saveFile(multiFile, file)) : new ResponseEntity<File>(HttpStatus.BAD_REQUEST);

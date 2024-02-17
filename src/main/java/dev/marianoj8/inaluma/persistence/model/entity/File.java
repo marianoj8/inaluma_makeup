@@ -28,15 +28,21 @@ public class File extends CustomAbstractEntity {
   @OneToOne(targetEntity = User.class) @OnDelete(action = OnDeleteAction.CASCADE) 
   private User user;
 
-  @OneToOne(targetEntity = Artigo.class) @OnDelete(action = OnDeleteAction.CASCADE) 
-  private Artigo artigo;
+  @OneToOne(targetEntity = Servico.class) @OnDelete(action = OnDeleteAction.CASCADE) 
+  private Servico servico;
 
-  public File setData(byte[] data) { 
+  @OneToOne(targetEntity = Produto.class) @OnDelete(action = OnDeleteAction.CASCADE) 
+  private Produto produto;
+
+  @OneToOne(targetEntity = VarianteProduto.class) @OnDelete(action = OnDeleteAction.CASCADE) 
+  private VarianteProduto varianteProduto;
+
+  public File setData(@NonNull byte[] data) { 
     this.data = data;
     return this;
   }
 
-  public File(String fileName, String contentType, double fixedSize, byte[] data) {
+  public File(String fileName, @NonNull String contentType, double fixedSize, @NonNull byte[] data) {
     super();
     this.fileName = fileName;
     this.contentType = contentType;
