@@ -8,7 +8,8 @@ public enum TipoUser {
   cliente("CLT", "Cliente", false),
   admin("ADM", "Administrador", true),
   operador("OPD","Operador", true),
-  funcionario("FNC", "Funcionario", true);
+  funcionario("FNC", "Funcionario", true),
+  entregador("ETG", "Entregador", true);
 
   private String nome;
   private String displayName;
