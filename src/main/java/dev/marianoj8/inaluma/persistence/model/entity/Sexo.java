@@ -1,5 +1,7 @@
 package dev.marianoj8.inaluma.persistence.model.entity;
 
+import org.springframework.lang.NonNull;
+
 import dev.marianoj8.inaluma.persistence.model.entity.utils.CustomAbstractEntity;
 import dev.marianoj8.inaluma.persistence.model.entity.utils.Genders;
 import jakarta.persistence.Column;
@@ -17,5 +19,5 @@ public class Sexo extends CustomAbstractEntity {
   @Column(unique = true, nullable = false)
   private String shortName;
   
-  public static Sexo fromEnum(Genders g) { return new Sexo(g.getNome(), g.getShortName()); }
+  public static @NonNull Sexo fromEnum(Genders g) { return new Sexo(g.getNome(), g.getShortName()); }
 }

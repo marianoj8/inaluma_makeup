@@ -1,5 +1,7 @@
 package dev.marianoj8.inaluma.persistence.model.entity;
 
+import org.springframework.lang.NonNull;
+
 import dev.marianoj8.inaluma.persistence.model.entity.utils.CustomAbstractEntity;
 import dev.marianoj8.inaluma.persistence.model.entity.utils.TiposPagamento;
 import jakarta.persistence.Column;
@@ -17,7 +19,7 @@ public class MetodoPagamento extends CustomAbstractEntity {
   @Column(columnDefinition = "Bit(1)", nullable = false)
   private boolean isElectronic;
 
-  public static MetodoPagamento fromEnum(TiposPagamento e) {
+  public static @NonNull MetodoPagamento fromEnum(TiposPagamento e) {
     return new MetodoPagamento(e.getNome(), e.getIsElectronic());
   }
 }

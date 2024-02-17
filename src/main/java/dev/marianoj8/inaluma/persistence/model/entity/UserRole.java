@@ -1,6 +1,6 @@
 package dev.marianoj8.inaluma.persistence.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.lang.NonNull;
 
 import dev.marianoj8.inaluma.persistence.model.entity.utils.CustomAbstractEntity;
 import dev.marianoj8.inaluma.persistence.model.entity.utils.TipoUser;
@@ -23,10 +23,10 @@ public class UserRole extends CustomAbstractEntity {
   @NotNull
   private boolean isEmployee;
 
-  public static UserRole fromEnum(TipoUser role) { return new UserRole(role.getNome(), role.getDisplayName(), role.isEmployee()); }
-   public boolean isOperator() { return this.getNome().equalsIgnoreCase(TipoUser.operador.getNome()); }
-   public boolean isAdmin() { return this.getNome().equalsIgnoreCase(TipoUser.admin.getNome()); }
-   public boolean isFuncionario() { return this.getNome().equalsIgnoreCase(TipoUser.funcionario.getNome()); }
-   public boolean isCliente() { return this.isEmployee() == false; }
-   public boolean isTeste() { return true; }
+  public static @NonNull UserRole fromEnum(TipoUser role) { return new UserRole(role.getNome(), role.getDisplayName(), role.isEmployee()); }
+    public boolean isOperator() { return this.getNome().equalsIgnoreCase(TipoUser.operador.getNome()); }
+    public boolean isAdmin() { return this.getNome().equalsIgnoreCase(TipoUser.admin.getNome()); }
+    public boolean isFuncionario() { return this.getNome().equalsIgnoreCase(TipoUser.funcionario.getNome()); }
+    public boolean isCliente() { return this.isEmployee() == false; }
+    public boolean isTeste() { return true; }
 }
