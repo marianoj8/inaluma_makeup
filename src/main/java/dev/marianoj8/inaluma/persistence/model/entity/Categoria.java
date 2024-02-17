@@ -1,5 +1,7 @@
 package dev.marianoj8.inaluma.persistence.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import dev.marianoj8.inaluma.persistence.model.entity.utils.CustomAbstractEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
@@ -15,9 +17,16 @@ public class Categoria extends CustomAbstractEntity {
   @NotEmpty private String nome;
   @NotNull private Boolean isForProduto;
 
-  @ManyToMany(mappedBy = "servicos") 
+  @ManyToMany(mappedBy = "servicos") @JsonIgnore
   private java.util.Set<User> users = new java.util.HashSet<>();
 
-  @ManyToMany(mappedBy = "categorias") 
+  @ManyToMany(mappedBy = "categorias") @JsonIgnore
   private java.util.Set<Artigo> artigos = new java.util.HashSet<>();
+
+  public Categoria(String nome, Boolean isForProduto) {
+    super();
+
+    this.nome = nome;
+    this.isForProduto = isForProduto;
+  }
 }
