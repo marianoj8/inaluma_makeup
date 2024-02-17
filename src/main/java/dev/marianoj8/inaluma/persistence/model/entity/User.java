@@ -6,11 +6,8 @@ import org.hibernate.annotations.OnDeleteAction;
 import dev.marianoj8.inaluma.persistence.model.entity.utils.CustomAbstractEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -44,13 +41,6 @@ public class User extends CustomAbstractEntity {
   @NotEmpty
   private String password;
 
-  @ManyToMany
-  @JoinTable(
-    name = "funcionarios_categorias",
-    joinColumns = @JoinColumn(name = "funcionario_id"),
-    inverseJoinColumns = @JoinColumn(name = "categoria_id")
-  ) private final java.util.Set<Categoria> servicos = new java.util.HashSet<>();
-
-  @OneToOne(mappedBy = "user") @OnDelete(action = OnDeleteAction.CASCADE)
-  private File imagem;
+  @OneToMany(targetEntity = Categoria.class) @OnDelete(action = OnDeleteAction.RESTRICT)
+  private final java.util.Set<Categoria> especialidades = new java.util.HashSet<>();
 }
