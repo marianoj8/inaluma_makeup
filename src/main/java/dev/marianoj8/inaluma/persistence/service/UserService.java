@@ -20,4 +20,5 @@ public class UserService extends BaseService<User, UserRepository> {
 
   public User signIn(String username, String password) { return repository.signIn(username, password); }
   public boolean checkAvailability(String username) { return repository.checkAvailability(username) != null; }
+  public User fetchByRoleId(Long id) { return repository.fetchByRoleId(id); }
 }

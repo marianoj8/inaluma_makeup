@@ -24,6 +24,9 @@ public interface UserRepository extends BaseRepository<User> {
   @Query("select f from User f where f.username = ?1")
   public User checkAvailability(String username);
 
+  @Query("select u from User u where u.role.id = ?1")
+  public User fetchByRoleId(Long id);
+
   public default List<User> fetchClients() { return fetchEmployees(false); }
   public default List<User> fetchAdmins() { return fetchByRole(TipoUser.admin.getNome()); }
   public default List<User> fetchOperators() { return fetchByRole(TipoUser.operador.getNome()); }

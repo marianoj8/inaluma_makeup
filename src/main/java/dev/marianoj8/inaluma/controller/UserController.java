@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,18 +19,12 @@ import lombok.AllArgsConstructor;
 public class UserController {
   @Autowired UserService service;
 
-  @GetMapping("role")
+  @GetMapping("fetchBy/role")
   public ResponseEntity<List<User>> getByRole(@RequestBody UserRole role) { return ResponseEntity.ok(service.fetchByRole(role)); }
 
-  @GetMapping("fetch/all")
-  public ResponseEntity<List<User>> fetch() {
-    return ResponseEntity.ok(service.fetchAll());
-  }
-  
+  @GetMapping("fetchBy/roleId/{id}")
+  public ResponseEntity<User> getByRoleId(@PathVariable Long id) { return ResponseEntity.ok(service.fetchByRoleId(id)); }
 
-  @DeleteMapping("{id}")
-  public ResponseEntity<Boolean> deleteById(Long id) { 
-    service.deleteById(id);
-    return ResponseEntity.ok(true);
-  }
+  @GetMapping("fetch/all")
+  public ResponseEntity<List<User>> fetch() { return ResponseEntity.ok(service.fetchAll()); }
 }
