@@ -1,43 +1,27 @@
 package dev.marianoj8.inaluma.controller;
 
+import dev.marianoj8.inaluma.controller.util.BaseControllerWithInserts;
 import dev.marianoj8.inaluma.persistence.model.entity.Pagamento;
 import dev.marianoj8.inaluma.persistence.service.PagamentoService;
-import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.*;
-
-@RestController @AllArgsConstructor
+@RestController
 @RequestMapping("v1/pagamentos")
-public class PagamentoController {
-  private PagamentoService service;
-
-  @GetMapping("{id}")
-  public ResponseEntity<Pagamento> getById(@PathVariable Long id) {
-    return ResponseEntity.ok(service.findById(id));
+public class PagamentoController extends BaseControllerWithInserts<Pagamento, PagamentoService> {
+  @GetMapping("fetchBy/facturaId/{id}")
+  public ResponseEntity<List<Pagamento>> fetchByFacturaId(@NonNull Long id) {
+    var res = service.fetchByFacturaId(id);
+    return (res == null) ? new ResponseEntity<List<Pagamento>>(HttpStatus.NOT_FOUND) : ResponseEntity.ok(res);
   }
 
-  @GetMapping
-  public ResponseEntity<List<Pagamento>> fetch() {
-    return ResponseEntity.ok(service.findAll());
-  }
-
-  @PostMapping
-  public ResponseEntity<Pagamento> create(@RequestBody Pagamento dto) {
-    return new ResponseEntity<>(service.create(dto), CREATED);
-  }
-
-  @PutMapping
-  public ResponseEntity<Pagamento> modify(@RequestBody Pagamento dto) {
-    return new ResponseEntity<>(service.update(dto), ACCEPTED);
-  }
-
-  @DeleteMapping("{id}")
-  public ResponseEntity<Void> delete(@PathVariable Long id) {
-    service.delete(id);
-    return new ResponseEntity<>(NO_CONTENT);
+  @GetMapping("fetchBy/operadorId/{id}")
+  public ResponseEntity<List<Pagamento>> fetchByOperadorId(@NonNull Long id) {
+    var res = service.fetchByOperadorId(id);
+    return (res == null) ? new ResponseEntity<List<Pagamento>>(HttpStatus.NOT_FOUND) : ResponseEntity.ok(res);
   }
 }
