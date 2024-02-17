@@ -21,7 +21,4 @@ public class UserController extends BaseControllerWithInserts<User, UserService>
 
   @GetMapping("fetchBy/roleId/{id}")
   public ResponseEntity<User> getByRoleId(@PathVariable Long id) { return ResponseEntity.ok(service.fetchByRoleId(id)); }
-
-  @GetMapping("fetch/all")
-  public ResponseEntity<List<User>> fetch() { return ResponseEntity.ok(service.fetchAll()); }
 }
