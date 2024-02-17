@@ -1,9 +1,9 @@
-package dev.marianoj8.inaluma.persistence.model.entity;
+package dev.marianoj8.inaluma.persistence.model.entity.utils;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import dev.marianoj8.inaluma.persistence.model.entity.utils.CustomAbstractEntity;
+import dev.marianoj8.inaluma.persistence.model.entity.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.OneToOne;

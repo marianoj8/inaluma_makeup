@@ -15,6 +15,8 @@ import java.time.LocalDate;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import dev.marianoj8.inaluma.persistence.model.entity.utils.AbstractDocument;
+
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Entity
 public class Agendamento extends AbstractDocument {
   @NotNull @Temporal(TemporalType.DATE)
