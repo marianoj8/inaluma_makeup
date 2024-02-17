@@ -23,6 +23,9 @@ public class Pagamento extends CustomAbstractEntity {
   @ManyToOne(targetEntity = Factura.class, optional = false) @OnDelete(action = OnDeleteAction.RESTRICT)
   private Factura factura;
   
-  @ManyToOne(targetEntity = User.class, optional = false) @OnDelete(action = OnDeleteAction.RESTRICT)
+  @ManyToOne(targetEntity = User.class) @OnDelete(action = OnDeleteAction.RESTRICT)
   private User operador;
+
+  @ManyToOne(targetEntity = User.class) @OnDelete(action = OnDeleteAction.RESTRICT)
+  private User cliente;
 }
