@@ -18,8 +18,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Data @NoArgsConstructor @EqualsAndHashCode(onlyExplicitlyIncluded = true) @MappedSuperclass
 public class CustomAbstractEntity {
-  protected Integer totalModified;
-
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @EqualsAndHashCode.Include
   protected Long id;
 
