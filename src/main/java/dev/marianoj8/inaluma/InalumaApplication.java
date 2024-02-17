@@ -11,7 +11,6 @@ import dev.marianoj8.inaluma.persistence.model.entity.Sexo;
 import dev.marianoj8.inaluma.persistence.model.entity.TipoArtigo;
 import dev.marianoj8.inaluma.persistence.model.entity.User;
 import dev.marianoj8.inaluma.persistence.model.entity.UserRole;
-import dev.marianoj8.inaluma.persistence.model.entity.utils.FilterOperator;
 import dev.marianoj8.inaluma.persistence.model.entity.utils.Genders;
 import dev.marianoj8.inaluma.persistence.model.entity.utils.TipoUser;
 import dev.marianoj8.inaluma.persistence.model.entity.utils.TiposArtigo;
@@ -22,8 +21,6 @@ import dev.marianoj8.inaluma.persistence.service.SexoService;
 import dev.marianoj8.inaluma.persistence.service.TipoArtigoServico;
 import dev.marianoj8.inaluma.persistence.service.UserRoleService;
 import dev.marianoj8.inaluma.persistence.service.UserService;
-
-import java.util.ArrayList;
 
 @SpringBootApplication @RequiredArgsConstructor
 public class InalumaApplication implements CommandLineRunner {
