@@ -1,13 +1,12 @@
 package dev.marianoj8.inaluma.persistence.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dev.marianoj8.inaluma.persistence.model.entity.Categoria;
 import dev.marianoj8.inaluma.persistence.repository.CategoriaRepository;
-import lombok.AllArgsConstructor;
+import dev.marianoj8.inaluma.persistence.service.util.BaseService;
+import jakarta.transaction.Transactional;
 
-@Service @AllArgsConstructor
-public class CategoriaService {
-  @Autowired private CategoriaRepository repository;
+@Service @Transactional
+public class CategoriaService extends BaseService<Categoria, CategoriaRepository> {
 }
