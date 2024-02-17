@@ -29,7 +29,7 @@ public class FileService {
     File img;
 
     if(isUser) img = usersService.getById(ownerId).getImagem();
-    else img = artigoService.findById(ownerId).getImagem();
+    else img = artigoService.getById(ownerId).getImagem();
 
     return prepareDownload(img);
   }
