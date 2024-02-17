@@ -1,93 +1,68 @@
 package dev.marianoj8.inaluma;
 
-import dev.marianoj8.inaluma.persistence.model.entity.ApplicationUser;
-import dev.marianoj8.inaluma.persistence.model.entity.Cliente;
-import dev.marianoj8.inaluma.persistence.model.entity.Funcionario;
-import dev.marianoj8.inaluma.persistence.model.entity.utils.Gender;
-import dev.marianoj8.inaluma.persistence.service.ApplicationUserService;
-import dev.marianoj8.inaluma.persistence.service.ClienteService;
-import dev.marianoj8.inaluma.persistence.service.FuncionarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.time.LocalDateTime;
+import dev.marianoj8.inaluma.persistence.model.entity.MetodoPagamento;
+import dev.marianoj8.inaluma.persistence.model.entity.Sexo;
+import dev.marianoj8.inaluma.persistence.model.entity.TipoArtigo;
+import dev.marianoj8.inaluma.persistence.model.entity.User;
+import dev.marianoj8.inaluma.persistence.model.entity.UserRole;
+import dev.marianoj8.inaluma.persistence.model.entity.utils.FilterOperator;
+import dev.marianoj8.inaluma.persistence.model.entity.utils.Genders;
+import dev.marianoj8.inaluma.persistence.model.entity.utils.TipoUser;
+import dev.marianoj8.inaluma.persistence.model.entity.utils.TiposArtigo;
+import dev.marianoj8.inaluma.persistence.model.entity.utils.TiposPagamento;
+import dev.marianoj8.inaluma.persistence.service.CategoriaService;
+import dev.marianoj8.inaluma.persistence.service.MetodoPagamentoService;
+import dev.marianoj8.inaluma.persistence.service.SexoService;
+import dev.marianoj8.inaluma.persistence.service.TipoArtigoServico;
+import dev.marianoj8.inaluma.persistence.service.UserRoleService;
+import dev.marianoj8.inaluma.persistence.service.UserService;
 
-@SpringBootApplication
-@RequiredArgsConstructor
+import java.util.ArrayList;
+
+@SpringBootApplication @RequiredArgsConstructor
 public class InalumaApplication implements CommandLineRunner {
-    private final ApplicationUserService applicationUserService;
-    private final FuncionarioService funcionarioService;
-    private final ClienteService clienteService;
+  private final UserService userService;
+  private final UserRoleService userRoleService;
+  private final SexoService sexoService;
+  private final MetodoPagamentoService metodoPagamentoService;
+  private final TipoArtigoServico tipoArtigoServico;
 
-    public static void main(String[] args) {
-        SpringApplication.run(InalumaApplication.class, args);
+  public static void main(String[] args) { SpringApplication.run(InalumaApplication.class, args); }
+
+  @Override
+  public void run(String... args) throws Exception {
+    if (userService.fetchAll().isEmpty()) {
+      addGenders();
+      addUserRoles();
+      addTipoArtigo();
+      addMetodosPagamento();
+      addUsers();
     }
+  }
 
-    @Override
-    public void run(String... args) throws Exception {
+  private void addGenders() { for(var g: Genders.values()) sexoService.create(Sexo.fromEnum(g)); }
+  private void addUserRoles() { for(var r: TipoUser.values()) userRoleService.create(UserRole.fromEnum(r)); }
+  private void addMetodosPagamento() { for(var m: TiposPagamento.values()) metodoPagamentoService.create(MetodoPagamento.fromEnum(m)); }
+  private void addTipoArtigo() { for(var a: TiposArtigo.values()) tipoArtigoServico.create(TipoArtigo.fromEnum(a)); }
 
-        if (applicationUserService.fetch().isEmpty()) {
+  private void addUsers() {
+    var femenino = sexoService.getByNome(Genders.femenino.getNome());
+    var admin = userRoleService.getByNome(TipoUser.admin.getNome());
 
-
-            Cliente c = new Cliente();
-            c.setNome("Mariano");
-            c.setSobrenome("JavaSwing");
-            c.setGenero(Gender.M);
-            c.setContato("932 518 145");
-
-
-            Funcionario f1 = new Funcionario();
-            f1.setNome("Valenia");
-            f1.setSobrenome("Araujo");
-            f1.setGenero(Gender.F);
-            f1.setContato("934 945 098");
-            f1.setEstado(true);
-            f1.setCreatedAt(LocalDateTime.now());
-
-
-            Funcionario f2 = new Funcionario();
-            f2.setNome("Peidoso");
-            f2.setSobrenome("Pedro");
-            f2.setGenero(Gender.M);
-            f2.setContato("932 943 000");
-            f2.setEstado(true);
-            f2.setCreatedAt(LocalDateTime.now());
-
-
-            Cliente cliente = clienteService.create(c);
-            Funcionario funcionario1 = funcionarioService.create(f1);
-            Funcionario funcionario2 = funcionarioService.create(f2);
-
-
-            ApplicationUser a1 = new ApplicationUser();
-            a1.setFuncionario(funcionario1);
-            a1.setUsername("valenia22");
-            a1.setPassword("password");
-            a1.setEstado(true);
-            a1.setPerfil("ADMIN");
-            a1.setCreatedAt(LocalDateTime.now());
-
-            ApplicationUser a2 = new ApplicationUser();
-            a2.setFuncionario(funcionario2);
-            a2.setUsername("piedoso1L");
-            a2.setPassword("password");
-            a2.setEstado(true);
-            a2.setPerfil("FUNCIONARIO");
-            a2.setCreatedAt(LocalDateTime.now());
-
-            ApplicationUser a3 = new ApplicationUser();
-            a3.setCliente(cliente);
-            a3.setUsername("marianojs8");
-            a3.setPassword("password");
-            a3.setEstado(true);
-            a3.setPerfil("CLIENTE");
-            a3.setCreatedAt(LocalDateTime.now());
-
-            applicationUserService.create(a1);
-            applicationUserService.create(a2);
-            applicationUserService.create(a3);
-        }
-    }
+    User u = new User();
+    u.setNome("Valênia Araújo");
+    u.setSobrenome("Castanheta");
+    u.setGenero(femenino);
+    u.setContato("934945098");
+    u.setRole(admin);
+    u.setUsername("valenia22");
+    u.setPassword("password");
+    
+    userService.create(u);
+  }
 }

@@ -12,13 +12,19 @@
 	<artifactId>inaluma</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Inaluma</name>
-	<description>Spring Boot projcto for Inaluma</description>
+	<description>Spring Boot project for Inaluma</description>
 
 	<properties>
 		<java.version>17</java.version>
 	</properties>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -53,6 +59,14 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<!-- Model Mapper -->
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+		<!-- Model Mapper -->
+
 		<!--Documentation library : Begin-->
 		<dependency>
 			<groupId>org.springdoc</groupId>
@@ -64,7 +78,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>inaluma_api</finalName>
+		<finalName>inaluma_api_anew</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

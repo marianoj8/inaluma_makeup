@@ -1,0 +1,14 @@
+package dev.marianoj8.inaluma.persistence.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import dev.marianoj8.inaluma.persistence.model.entity.ItemFactura;
+import dev.marianoj8.inaluma.persistence.repository.ItensFacturaRepository;
+import lombok.AllArgsConstructor;
+
+
+@Service @AllArgsConstructor
+public class ItensFacturaService {
+  @Autowired private ItensFacturaRepository repository;
+}

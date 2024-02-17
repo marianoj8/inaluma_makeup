@@ -10,36 +10,34 @@ import java.util.List;
 
 import static org.springframework.http.HttpStatus.*;
 
-@RestController
-@AllArgsConstructor
+@RestController @AllArgsConstructor
 @RequestMapping("v1/pagamentos")
 public class PagamentoController {
+  private PagamentoService service;
 
-    private PagamentoService service;
+  @GetMapping("{id}")
+  public ResponseEntity<Pagamento> getById(@PathVariable Long id) {
+    return ResponseEntity.ok(service.findById(id));
+  }
 
-    @GetMapping("{id}")
-    public ResponseEntity<Pagamento> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(service.getById(id));
-    }
+  @GetMapping
+  public ResponseEntity<List<Pagamento>> fetch() {
+    return ResponseEntity.ok(service.findAll());
+  }
 
-    @GetMapping
-    public ResponseEntity<List<Pagamento>> fetch() {
-        return ResponseEntity.ok(service.fetch());
-    }
+  @PostMapping
+  public ResponseEntity<Pagamento> create(@RequestBody Pagamento dto) {
+    return new ResponseEntity<>(service.create(dto), CREATED);
+  }
 
-    @PostMapping
-    public ResponseEntity<Pagamento> create(@RequestBody Pagamento dto) {
-        return new ResponseEntity<>(service.create(dto), CREATED);
-    }
+  @PutMapping
+  public ResponseEntity<Pagamento> modify(@RequestBody Pagamento dto) {
+    return new ResponseEntity<>(service.update(dto), ACCEPTED);
+  }
 
-    @PutMapping
-    public ResponseEntity<Pagamento> modify(@RequestBody Pagamento dto) {
-        return new ResponseEntity<>(service.update(dto), ACCEPTED);
-    }
-
-    @DeleteMapping("{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        service.delete(id);
-        return new ResponseEntity<>(NO_CONTENT);
-    }
+  @DeleteMapping("{id}")
+  public ResponseEntity<Void> delete(@PathVariable Long id) {
+    service.delete(id);
+    return new ResponseEntity<>(NO_CONTENT);
+  }
 }
