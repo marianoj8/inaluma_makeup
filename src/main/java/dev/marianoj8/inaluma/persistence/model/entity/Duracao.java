@@ -5,7 +5,6 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import dev.marianoj8.inaluma.persistence.model.entity.utils.CustomAbstractEntity;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,6 +15,6 @@ public class Duracao extends CustomAbstractEntity {
   private Integer horas;
   private Integer minutos;
 
-  @OneToOne(targetEntity = Artigo.class, optional = false) @OnDelete(action = OnDeleteAction.CASCADE)
-  private Artigo servico;
+  @OneToOne(targetEntity = Servico.class, optional = false) @OnDelete(action = OnDeleteAction.CASCADE)
+  private Servico servico;
 }
