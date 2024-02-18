@@ -3,7 +3,7 @@ package dev.marianoj8.inaluma.persistence.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import dev.marianoj8.inaluma.persistence.model.entity.ItemFactura;
+import dev.marianoj8.inaluma.persistence.model.entity.Item;
 import dev.marianoj8.inaluma.persistence.repository.ItensFacturaRepository;
 import lombok.AllArgsConstructor;
 

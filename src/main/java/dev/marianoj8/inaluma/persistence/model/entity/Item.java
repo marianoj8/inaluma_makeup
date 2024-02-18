@@ -15,13 +15,19 @@ import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Entity
 @Table(name = "detalhes_factura")
-public class ItemFactura extends CustomAbstractEntity {
+public class Item extends CustomAbstractEntity {
   @NotEmpty private Integer qtd;
   @NotEmpty private Double preco;
 
-  @ManyToOne(targetEntity = Artigo.class, optional = false) @OnDelete(action = OnDeleteAction.RESTRICT)
-  private Artigo item;
+  @ManyToOne(targetEntity = Servico.class) @OnDelete(action = OnDeleteAction.RESTRICT)
+  private Servico servico;
 
-  @ManyToOne(targetEntity = Factura.class, optional = false) @OnDelete(action = OnDeleteAction.RESTRICT)
+  @ManyToOne(targetEntity = VarianteProduto.class) @OnDelete(action = OnDeleteAction.RESTRICT)
+  private VarianteProduto produto;
+
+  @ManyToOne(targetEntity = Factura.class) @OnDelete(action = OnDeleteAction.RESTRICT)
   private Factura factura;
+
+  @ManyToOne(targetEntity = Carrinho.class) @OnDelete(action = OnDeleteAction.CASCADE)
+  private Carrinho carrinho;
 }
