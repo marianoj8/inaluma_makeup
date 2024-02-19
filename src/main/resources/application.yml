@@ -1,7 +1,7 @@
 server:
   port: 8080
   error:
-    include-stacktrace: on_param
+    include-stacktrace: on-param
 
 logging:
   level:
@@ -13,7 +13,8 @@ spring:
   application:
     name: inaluma-makeup
   datasource:
-    url: jdbc:mysql://inaluma-db:3306/inaluma_db?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&sslMode=DISABLED&useTimezone=true&serverTimezone=Africa/Luanda
+    # url: jdbc:mysql://inaluma-db-anew:3306/inaluma_db_anew?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&sslMode=DISABLED&useTimezone=true&serverTimezone=Africa/Luanda
+    url: jdbc:mysql://localhost:3306/inaluma_db_anew?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&sslMode=DISABLED&useTimezone=true&serverTimezone=Africa/Luanda
     username: inaluma
     password: password
 
@@ -21,6 +22,12 @@ spring:
     open-in-view: false
     hibernate:
       ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          "[batch_size]": 30
+        dialect: org.hibernate.dialect.MySQLDialect
+        "[enable_lazy_load_no_trans]": true # solves "No Session JSON Parse exception" 
 
   servlet:
     multipart:

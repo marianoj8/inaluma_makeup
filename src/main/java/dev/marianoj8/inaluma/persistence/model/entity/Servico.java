@@ -1,59 +1,27 @@
 package dev.marianoj8.inaluma.persistence.model.entity;
 
-import dev.marianoj8.inaluma.persistence.model.entity.utils.TimeUnits;
-import jakarta.persistence.Column;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.Lob;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+@Entity @Getter @Setter @NoArgsConstructor @AllArgsConstructor
+public class Servico extends Artigo {
+  @NotNull @OneToOne(mappedBy = "servico") @OnDelete(action = OnDeleteAction.RESTRICT)
+  private Duracao duracao;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity
-public class Servico extends CustomAbstractEntity {
-    @Column(unique = true, nullable = false)
-    private String nome;
-    private String descricao;
-    @Column(nullable = false)
-    private double preco;
-    @Column(nullable = false)
-    private int duracao;
-    @Column(nullable = false)
-    private TimeUnits units;
-    private boolean estado;
+  @ManyToOne(targetEntity = Servico.class) @JoinColumn(name = "servico_id")
+  private Servico servico;
 
-    @ManyToOne(targetEntity = Funcionario.class, optional = true)
-    private Funcionario funcionario;
-
-    @Lob
-    @Column(columnDefinition = "longblob")
-    private byte[] data;
-
-    private String fileName;
-    private String contentType;
-    private double fixedSize;
-
-    public Servico(Long id, LocalDateTime createdAt, LocalDateTime lastModifiedAt, int totalModified, String nome,
-                   String descricao, double preco, int duracao, TimeUnits units, boolean estado, Funcionario funcionario, byte[] data, String fileName, String contentType, double fixedSize) {
-        super(id, createdAt, lastModifiedAt, totalModified);
-        this.nome = nome;
-        this.descricao = descricao;
-        this.preco = preco;
-        this.duracao = duracao;
-        this.units = units;
-        this.estado = estado;
-        this.funcionario = funcionario;
-
-        this.data = data;
-        this.fileName = fileName;
-        this.contentType = contentType;
-        this.fixedSize = fixedSize;
-    }
+  @NotEmpty
+  private Double preco;
 }

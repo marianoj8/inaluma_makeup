@@ -1,56 +1,21 @@
 package dev.marianoj8.inaluma.controller;
 
-import dev.marianoj8.inaluma.persistence.model.entity.Factura;
-import dev.marianoj8.inaluma.persistence.service.FacturaService;
-import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-import static org.springframework.http.HttpStatus.*;
-
-@RestController
-@AllArgsConstructor
-@RequestMapping("v1/facturas")
-public class FacturaController {
-
-    private FacturaService service;
-
-    @GetMapping("{id}")
-    public ResponseEntity<Factura> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(service.getById(id));
-    }
-
-    @GetMapping
-    public ResponseEntity<List<Factura>> fetch() {
-        return ResponseEntity.ok(service.fetch());
-    }
+import dev.marianoj8.inaluma.controller.util.AbstractDocumentController;
+import dev.marianoj8.inaluma.persistence.model.entity.Factura;
+import dev.marianoj8.inaluma.persistence.service.FacturaService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
+@RestController @RequestMapping("v1/facturas")
+public class FacturaController extends AbstractDocumentController<Factura, FacturaService>{
+  protected ResponseEntity<Factura> persist(@NonNull Factura dto) { return new ResponseEntity<>(service.create(dto, "FT"), HttpStatus.CREATED); }
 
-    @GetMapping("cliente/{clienteId}")
-    public ResponseEntity<Factura> getByClienteId(@PathVariable Long clienteId){
-        return ResponseEntity.ok(service.getByClienteId(clienteId));
-    }
-    @GetMapping("agendamento/{agendamentoId}")
-    public ResponseEntity<Factura> getByAgendamentoId(@PathVariable Long agendamentoId){
-        return ResponseEntity.ok(service.getByAgendamentoId(agendamentoId));
-    }
-
-    @PostMapping
-    public ResponseEntity<Factura> create(@RequestBody Factura dto) {
-        return new ResponseEntity<>(service.create(dto), CREATED);
-    }
-
-    @PutMapping
-    public ResponseEntity<Factura> modify(@RequestBody Factura dto) {
-        return new ResponseEntity<>(service.update(dto), ACCEPTED);
-    }
-
-    @DeleteMapping("{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        service.delete(id);
-        return new ResponseEntity<>(NO_CONTENT);
-    }
+  @GetMapping("fetchBy/agendamentoId/{id}")
+  public ResponseEntity<Factura> fetchByAgendamentoId(@RequestParam Long id) { return ResponseEntity.ok(service.fetchByAgendamentoId(id)); }
 }
